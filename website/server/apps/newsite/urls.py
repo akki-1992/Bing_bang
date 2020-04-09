@@ -5,6 +5,7 @@ from apps.newsite.views import newsiteViewSet
 from apps.newsite.views import MLAlgorithmViewSet
 from apps.newsite.views import MLAlgorithmStatusViewSet
 from apps.newsite.views import MLRequestViewSet
+from apps.newsite.views import PredictView 
 
 router = DefaultRouter(trailing_slash=False)
 router.register(r"newsite", newsiteViewSet, basename="newsite")
@@ -14,4 +15,7 @@ router.register(r"mlrequests", MLRequestViewSet, basename="mlrequests")
 
 urlpatterns = [
     url(r"^api/v1/", include(router.urls)),
+    url(
+        r"^api/v1/(?P<newsite_name>.+)/predict$", PredictView.as_view(), name="predict"
+    ),
 ]
